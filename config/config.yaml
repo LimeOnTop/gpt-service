@@ -1,0 +1,16 @@
+app: 
+  name: gpt-service
+  version: "0.0.1"
+
+grpc:
+  port: 50053
+  timeout: 30
+
+logger:
+  level: "debug"
+
+gpt:
+  authorization_key: "NTU0NzAzOTMtM2U1MS00NzJmLTg2MjQtODMyYzY2OWVkNjE0OmJkNGQ0ZjY0LTNhYzgtNDNlMC1hMDA3LTYzYWU2NjE3NjFhYQ=="
+
+
+
