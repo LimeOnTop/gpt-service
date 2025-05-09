@@ -9,7 +9,7 @@ type (
 		App    AppConfig    `yaml:"app"`
 		Logger LoggerConfig `yaml:"logger"`
 		GRPC   GRPCConfig   `yaml:"grpc"`
-		GPT    GPTConfig    `yaml:"gpt"`
+		Token  TokenConfig  `yaml:"token"`
 	}
 
 	AppConfig struct {
@@ -26,7 +26,7 @@ type (
 		Timeout int `yaml:"timeout"`
 	}
 
-	GPTConfig struct {
+	TokenConfig struct {
 		AuthorizationKey string `yaml:"authorization_key"`
 	}
 )

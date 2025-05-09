@@ -9,8 +9,9 @@ grpc:
 logger:
   level: "debug"
 
-gpt:
-  authorization_key: "NTU0NzAzOTMtM2U1MS00NzJmLTg2MjQtODMyYzY2OWVkNjE0OmJkNGQ0ZjY0LTNhYzgtNDNlMC1hMDA3LTYzYWU2NjE3NjFhYQ=="
+gpt-token:
+  authorization_key: "my-auth-key"
+  
 
 
 

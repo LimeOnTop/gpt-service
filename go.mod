@@ -3,8 +3,8 @@ module gpt-service
 go 1.24.2
 
 require (
-	github.com/google/uuid v1.6.0
 	github.com/ilyakaznacheev/cleanenv v1.5.0
+	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
 	google.golang.org/grpc v1.72.0
 	google.golang.org/protobuf v1.36.6
 )
