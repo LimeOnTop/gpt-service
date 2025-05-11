@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	ErrSendRequest    = fmt.Errorf("Failed to send request")
-	ErrCreateRequest  = fmt.Errorf("Failed to create request")
+	ErrSendRequest   = fmt.Errorf("failed to send request")
+	ErrCreateRequest = fmt.Errorf("failed to create request")
 )
 
 var _ Handler = (*handler)(nil)
@@ -76,7 +76,7 @@ func (h *handler) GetGPTRecommendation(products []string, preference string) (st
 	return string(body), nil
 }
 
-//TODO: заглушка, нужно реализовать получение изображения
+// TODO: заглушка, нужно реализовать получение изображения
 func (h *handler) GetGPTImage(message string) ([]byte, string, error) {
 	return nil, "", nil
 }

@@ -1,4 +1,4 @@
-package server
+package grpcgpt
 
 import (
 	"context"
@@ -12,6 +12,12 @@ var _ pb.RecommendationServer = (*GPTServer)(nil)
 type GPTServer struct {
 	pb.UnimplementedRecommendationServer
 	gptHandle handler.Handler
+}
+
+func New(gptHandle handler.Handler) *GPTServer {
+	return &GPTServer{
+		gptHandle: gptHandle,
+	}
 }
 
 func(g *GPTServer) GetGPTRecommendation(ctx context.Context, req *pb.UserRequest) (*pb.GPTResponse, error) {

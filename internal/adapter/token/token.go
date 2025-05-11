@@ -19,7 +19,7 @@ var (
 var _ Token = (*token)(nil)
 
 type Token interface {
-	GetCurrentToken()string
+	GetCurrentToken() string
 }
 
 type token struct {
@@ -27,18 +27,18 @@ type token struct {
 	ExpiresAt   int64  `json:"expires_at"`
 }
 
-func(t *token) GetCurrentToken() (string) {
+func (t *token) GetCurrentToken() string {
 	expiresAt := t.ExpiresAt
 	apochNow := time.Now().Unix()
 	timeDelta := apochNow - (expiresAt / 1000)
 	if timeDelta > 0 {
-		t.Auth()
+		Auth()
 	}
 	token := t.AccessToken
 	return token
 }
 
-func(t *token) Auth() (*token, error) {
+func Auth() (*token, error) {
 	url := "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
 	method := "POST"
 	payload := strings.NewReader("scope=GIGACHAT_API_PERS")
@@ -66,7 +66,7 @@ func(t *token) Auth() (*token, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	var t *token
 	err = json.Unmarshal(body, &t)
 	if err != nil {
 		return nil, ErrInvalidToken
