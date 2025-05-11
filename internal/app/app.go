@@ -38,14 +38,14 @@ func Run(cfg *config.Config, devMode bool) {
 		logger.Fatal("Failed to get authentication token")
 	}
 
-	handlerUseCase := handler.New(token)
+	gptHandler := handler.New(token)
 
 	grpcServer := grpc.NewServer(
 		grpc.UnaryInterceptor(grpcLogUnaryInterceptor),
 		grpc.StreamInterceptor(grpcLogStreamInterceptor),
 	)
 
-	grpcController := grpcgpt.New(handlerUseCase)
+	grpcController := grpcgpt.New(gptHandler)
 	gpt.RegisterRecommendationServer(grpcServer, grpcController)
 
 	//Слушаем порт grpc
