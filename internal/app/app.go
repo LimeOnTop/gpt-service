@@ -35,7 +35,7 @@ func Run(cfg *config.Config, devMode bool) {
 
 	token, err := token.Auth()
 	if err != nil {
-		logger.Fatal("Failed to get authentication token")
+		logger.Fatal("Failed to get authentication token with error: ", err)
 	}
 
 	gptHandler := handler.New(token)
@@ -53,11 +53,11 @@ func Run(cfg *config.Config, devMode bool) {
 	if err != nil {
 		logger.Fatalf("Failed to listen on port %d: %v", cfg.GRPC.Port, err)
 	}
-
+	logger.Printf("gRPC server listening on port %d", cfg.GRPC.Port)
+	// Запускаем gRPC сервер
 	if err := grpcServer.Serve(lis); err != nil {
 		logger.Fatalf("Failed to serve gRPC server: %v", err)
 	}
-
 }
 
 // Интерсепторы для логирования

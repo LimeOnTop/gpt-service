@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"crypto/tls"
 
 	"gpt-service/internal/adapter/token"
 	"gpt-service/internal/entity"
@@ -36,6 +37,7 @@ func New(token token.Token) Handler {
 }
 
 func (h *handler) GetGPTRecommendation(products []string, preference string) (string, error) {
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	url := "https://gigachat.devices.sberbank.ru//api/v1/chat/completions"
 	method := "POST"
 	prompt := fmt.Sprintf("У меня есть следующие продукты: %s и следующее предпочтение по калорийности: %s Что я могу из них приготовить?", strings.Join(products, ","), preference)
@@ -52,9 +54,10 @@ func (h *handler) GetGPTRecommendation(products []string, preference string) (st
 	if err != nil {
 		return "", err
 	}
-	req, err := http.NewRequest(url, method, bytes.NewBuffer(jsonBody))
-	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Basic "+h.accessToken.GetCurrentToken())
+	req, err := http.NewRequest(method, url, bytes.NewBuffer(jsonBody))
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Authorization", "Bearer "+h.accessToken.GetCurrentToken())
 	if err != nil {
 		return "", ErrCreateRequest
 	}

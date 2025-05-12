@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 	"time"
+	"crypto/tls"
 
 	uuid "github.com/nu7hatch/gouuid"
 )
@@ -39,6 +40,7 @@ func (t *token) GetCurrentToken() string {
 }
 
 func Auth() (*token, error) {
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	url := "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
 	method := "POST"
 	payload := strings.NewReader("scope=GIGACHAT_API_PERS")
@@ -49,6 +51,7 @@ func Auth() (*token, error) {
 		return nil, err
 	}
 	authKey, exists := os.LookupEnv("GPT_AUTHORIZATION_KEY")
+
 	if !exists {
 		return nil, errors.New("authorization key not found")
 	}

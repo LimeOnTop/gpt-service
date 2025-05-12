@@ -2,9 +2,9 @@
 .idea/
 .idea
 .vscode
-
 # Config
 .env
+config/config.yaml
 
 # Binaries for programs and plugins
 *.exe

@@ -10,7 +10,7 @@ logger:
   level: "debug"
 
 gpt-token:
-  authorization_key: "my-auth-key"
+  authorization_key: ""
   
 
 
