@@ -9,7 +9,7 @@ type (
 		App    AppConfig    `yaml:"app"`
 		Logger LoggerConfig `yaml:"logger"`
 		GRPC   GRPCConfig   `yaml:"grpc"`
-		Token  TokenConfig  `yaml:"token"`
+		Token  TokenConfig  `yaml:"gpt-token"`
 	}
 
 	AppConfig struct {

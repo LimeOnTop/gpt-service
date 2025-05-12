@@ -15,5 +15,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	log.Printf("Starting %s v%s", cfg.App.Name, cfg.App.Version)
+
 	app.Run(cfg, *devmode)
 }
